@@ -236,5 +236,4 @@ public class FifteenGame {
 		// that's all folks
 
 	}
-
 }
