@@ -114,24 +114,29 @@ public class FifteenGame {
 	 */
 	public boolean won() {
 		//TODO: This part isn't right
-		
-		boolean flag = true;
 		int counter = (board.length*board.length)-1;
+		int otherCounter = 0;
+		
 		
 		for( int i = 0; i < board.length; i++)
 		{
 			for (int j = 0; j < board[i].length; j++){
 				
 				if(board[i][j]!= counter){
-				flag = false;
 				counter--;
 				}
 				else{
-					flag = true;
+					counter--;
+					otherCounter++;
 				}
 			}
 		}
-			return flag;
+			if(otherCounter == board.length * board.length){
+				return true;
+			}
+			else{
+				return false;
+			}
 	}
 
 	/**
