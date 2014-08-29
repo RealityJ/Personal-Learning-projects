@@ -91,10 +91,21 @@ public class FifteenGame {
 	 * Prints the board in its current state.
 	 */
 	public void draw() {
-		// TODO Auto-generated method stub
-		for (int i = 0; i <= board.length; i++){
-			for(int j = 0; i <= board[i].length; j++){
-				System.out.print(board[i][j]);
+		int counter = 0;
+		for (int i = 0; i <= board.length-1; i++){
+			for(int j = 0; j <= board[i].length-1; j++){
+				counter++;
+				if(counter != d & board[i][j] <= 9){
+					System.out.print(board[i][j] + " " + " ");
+					
+				}
+				else if(counter != d & board [i][j] > 9){
+					System.out.print(board[i][j] + " ");
+				}
+				else{
+					System.out.println(board[i][j]);
+					counter = 0;
+				}
 			}
 		}
 
@@ -105,7 +116,100 @@ public class FifteenGame {
 	 * false.
 	 */
 	public boolean move(int tile) {
-			
+		boolean wasTheMovePossible = false;
+		//duplicated the board for the movement/switch of tiles
+		int movementBoard[][] = new int [d][d];
+		for (int i = 0; i<= board.length-1; i++){
+			for(int j = 0; j<= board[i].length-1; j++){
+				movementBoard[i][j] = board[i][j];
+			}
+		}
+		//end of the duplication
+		
+		for (int i = 0; i<= board.length-1; i++){
+			for(int j = 0; j<= board[i].length-1; j++){
+				
+			if(i == 1 && j == 1){
+				if(board[i][j] == 0 && board[i+1][j] == tile){
+					wasTheMovePossible = true;
+					board[i][j] = board[i+1][j];
+					board[i+1][j] = movementBoard[i][j];
+					break;
+				}
+				else if(board[i][j] == 0 && board [i][j+1] == tile){
+					wasTheMovePossible = true;
+					board[i][j] = board[i][j+1];
+					board[i][j+1]= movementBoard[i][j];
+					break;
+				}
+				if(board[i][j] == 0 && board[i-1][j] == tile){
+					wasTheMovePossible = true;
+					board[i][j] = board[i-1][j];
+					board[i-1][j]= movementBoard[i-1][j];
+					break;
+				}
+				else if(board[i][j] == 0 && board[i][j-1] == tile){
+					wasTheMovePossible = true;
+					board[i][j] = board[i][j-1];
+					board[i][j-1] = movementBoard[i][j];
+					
+					break;
+				}
+			}
+			else if( i != 2 && j != 2){
+					if(board[i][j] == 0 && board[i+1][j] == tile){
+						wasTheMovePossible = true;
+						board[i][j] = board[i+1][j];
+						board[i+1][j] = movementBoard[i][j];
+						break;
+					}
+					else if(board[i][j] == 0 && board [i][j+1] == tile){
+						wasTheMovePossible = true;
+						board[i][j] = board[i][j+1];
+						board[i][j+1]= movementBoard[i][j];
+						break;
+					}
+				}
+				else if( i != 0 && j != 0){
+					if(board[i][j] == 0 && board[i-1][j] == tile){
+						wasTheMovePossible = true;
+						board[i-1][j] = board[i][j];
+						board[i][j]= movementBoard[i-1][j];
+						break;
+					}
+					else if(board[i][j] == 0 && board[i][j-1] == tile){
+						wasTheMovePossible = true;
+						board[i][j] = board[i][j-1];
+						board[i][j-1] = movementBoard[i][j];
+						
+						break;
+					}
+				}
+				else if( i != 0 && j==0 ){
+					if(board[i][j] == 0 && board[i][j+1] == tile){
+						wasTheMovePossible = true;
+						board[i][j] = board[i][j+1];
+						board[i][j+1]= movementBoard[i][j];
+						break;
+					}
+					}
+				else if(i == 0 && j !=0){
+//					if(board[i][j] == 0 && board[i-1][j] == tile){
+//						wasTheMovePossible = true;
+//						board[i-1][j] = board[i][j];
+//						board[i][j]= movementBoard[i-1][j];
+//						break;
+//					}
+				if(board[i][j] == 0 && board[i][j-1] == tile){
+						wasTheMovePossible = true;
+						board[i][j] = board[i][j-1];
+						board[i][j-1] = movementBoard[i][j];
+						break;
+					}
+					}
+			}
+		}
+		return wasTheMovePossible;
 	}
 
 	/**
@@ -114,29 +218,29 @@ public class FifteenGame {
 	 */
 	public boolean won() {
 		//TODO: This part isn't right
-		int counter = (board.length*board.length)-1;
-		int otherCounter = 0;
-		
-		
-		for( int i = 0; i < board.length; i++)
-		{
-			for (int j = 0; j < board[i].length; j++){
-				
-				if(board[i][j]!= counter){
-				counter--;
-				}
-				else{
-					counter--;
-					otherCounter++;
-				}
-			}
-		}
-			if(otherCounter == board.length * board.length){
-				return true;
-			}
-			else{
-				return false;
-			}
+//		int counter = (board.length*board.length)-1;
+//		int otherCounter = 0;
+//		
+//		for( int i = 0; i < board.length; i++)
+//		{
+//			for (int j = 0; j < board[i].length; j++){
+//				
+//				if(board[i][j]!= counter){
+//				return false;
+//				}
+//				else if(board[i][j] == counter){
+//					counter--;
+//					otherCounter++;
+//				}
+//			}
+//		}
+//			if(otherCounter == board.length * board.length){
+//				return true;
+//			}
+//			else{
+//				return false;
+//			}
+		return false;
 	}
 
 	/**
