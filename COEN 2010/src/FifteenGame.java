@@ -218,29 +218,28 @@ public class FifteenGame {
 	 */
 	public boolean won() {
 		//TODO: This part isn't right
-//		int counter = (board.length*board.length)-1;
-//		int otherCounter = 0;
-//		
-//		for( int i = 0; i < board.length; i++)
-//		{
-//			for (int j = 0; j < board[i].length; j++){
-//				
-//				if(board[i][j]!= counter){
-//				return false;
-//				}
-//				else if(board[i][j] == counter){
-//					counter--;
-//					otherCounter++;
-//				}
-//			}
-//		}
-//			if(otherCounter == board.length * board.length){
-//				return true;
-//			}
-//			else{
-//				return false;
-//			}
-		return false;
+		int counter = (board.length*board.length)-1;
+		int otherCounter = 0;
+		
+		for( int i = 0; i < board.length; i++)
+		{
+			for (int j = 0; j < board[i].length; j++){
+				
+				if(board[i][j]!= counter){
+				return false;
+				}
+				else if(board[i][j] == counter){
+					counter--;
+					otherCounter++;
+				}
+			}
+		}
+			if(otherCounter == board.length * board.length){
+				return true;
+			}
+			else{
+				return false;
+			}
 	}
 
 	/**
