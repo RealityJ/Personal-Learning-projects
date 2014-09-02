@@ -123,6 +123,7 @@ public class FifteenGame {
 				for(int j = 0; j<= board[i].length-1; j++){
 					if(i > 0 && i < board.length-1 && j > 0 && j < board.length-1){
 						//handles the middle buttons
+						//moves to the right
 						if(board[i][j+1] == tile && board[i][j] == 0){
 							board[i][j] = board[i][j+1];
 							board[i][j+1] = empty;
