@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.math.*;
 
 /**
  * fifteenGame.java
@@ -118,154 +119,70 @@ public class FifteenGame {
 	public boolean move(int tile) {
 		 int empty = 0;
 		 boolean valid = false;
+		 int placeOfI = 0;
+		 int placeOfJ = 0;
+		 int tileToMoveI = 0;
+		 int tileToMoveJ = 0;
+		 boolean LegalMove;
+		 int otherCounter = 0;
 		 
-		 for (int i = 0; i<= board.length-1; i++){
-				for(int j = 0; j<= board[i].length-1; j++){
-					if(i > 0 && i < board.length-1 && j > 0 && j < board.length-1){
-						//handles the middle buttons
-						//moves to the right
-						if(board[i][j+1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j+1];
-							board[i][j+1] = empty;
-							valid = true;
-							break;
-						}else if(board[i+1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i+1][j];
-							board[i+1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i-1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i-1][j];
-							board[i-1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i][j-1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j-1];
-							board[i][j-1] = empty;
-							valid = true;
-							break;
-						}
-					}else if(i == 0 && j > 0 && j < board.length-1){
-						//handles the edges
-						if(board[i][j+1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j+1];
-							board[i][j+1] = empty;
-							valid = true;
-							break;
-						}else if(board[i+1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i+1][j];
-							board[i+1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i][j-1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j-1];
-							board[i][j-1] = empty;
-							valid = true;
-							break;
-						}
-					}else if(i == board.length-1 && j < board.length-1 && j > 0){
-						if(board[i][j+1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j+1];
-							board[i][j+1] = empty;
-							valid = true;
-							break;
-						}else if(board[i-1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i-1][j];
-							board[i-1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i][j-1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j-1];
-							board[i][j-1] = empty;
-							valid = true;
-							break;
-						}
-					}else if(j == 0 && i > 0 && i < board.length-1){
-						if(board[i-1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i-1][j];
-							board[i-1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i][j+1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j+1];
-							board[i][j+1] = empty;
-							valid = true;
-							break;
-						}else if(board[i+1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i+1][j];
-							board[i+1][j] = empty;
-							valid = true;
-							break;
-						}
-					}else if(j == board.length-1 && i > 0 &&  i < board.length-1){
-						if(board[i-1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i-1][j];
-							board[i-1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i+1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i+1][j];
-							board[i+1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i][j-1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j-1];
-							board[i][j-1] = empty;
-							valid = true;
-							break;
-						}
-					}else if( i == 0 && j == 0){
-						if(board[i+1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i+1][j];
-							board[i+1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i][j+1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j+1];
-							board[i][j+1] = empty;
-							valid = true;
-							break;
-						}
-					}else if( i == board.length-1 && j == board.length-1){
-						if(board[i-1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i-1][j];
-							board[i-1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i][j-1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j-1];
-							board[i][j-1] = empty;
-							valid = true;
-							break;
-						}
-					}else if(i == 0 & j == board.length-1){
-						if(board[i+1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i+1][j];
-							board[i+1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i][j-1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j-1];
-							board[i][j-1] = empty;
-							valid = true;
-							break;
-						}
-					}else if(i == board.length-1 && j == 0){
-						if(board[i-1][j] == tile && board[i][j] == 0){
-							board[i][j] = board[i-1][j];
-							board[i-1][j] = empty;
-							valid = true;
-							break;
-						}else if(board[i][j+1] == tile && board[i][j] == 0){
-							board[i][j] = board[i][j+1];
-							board[i][j+1] = empty;
-							valid = true;
-							break;
-						}
-					}
-			}
+		 for (int i = 0; i<=board.length-1;i++){
+			 for(int j=0; j<= board.length-1; j ++){
+				 if(board[i][j] == 0){
+					 placeOfI = i;
+					 placeOfJ = j;
+//					 System.out.println("ZeroPosition = " + placeOfI +"," + placeOfJ);
+				 }
+				 if(board[i][j] == tile){
+					 tileToMoveI = i;
+					 tileToMoveJ = j;
+//					 System.out.println("TilePosition = " + tileToMoveI +"," + tileToMoveJ);
+				 }
+			 }
 		 }
-			return valid;
+		 if(Math.abs(placeOfI-tileToMoveI)<=1 && Math.abs(placeOfJ-tileToMoveJ) <=1){
+			 LegalMove = true;
+//			 System.out.println("Legal Move");
+			 board[placeOfI][placeOfJ] = tile;
+			 board[tileToMoveI][tileToMoveJ] = 0;
+			 
+		 }
+		 else{
+			 LegalMove = false;
+		 }
+		 return LegalMove;
+		 
+		 
+		 
+		 
+//		 for (int i = 0; i<= board.length-1; i++){
+//				for(int j = 0; j<= board[i].length-1; j++){
+////					if(i > 0 && i < board.length-1 && j > 0 && j < board.length-1){
+//						//handles the middle buttons
+//						//moves to the right
+//						if(board[i][j] == 0){
+//							placeOfI = i;
+//							placeOfJ = j;
+//							System.out.println(placeOfI +" "+placeOfJ);
+//							otherCounter++;
+//						}else if(board[i][j] == tile){
+//							tileTotileToMoveI = i;
+//							tileTotileToMoveJ = j;
+//							System.out.println(tileTotileToMoveI +" "+tileTotileToMoveJ);
+//							otherCounter++;
+//						}
+//						if(otherCounter == 2 && Math.abs(placeOfI - tileTotileToMoveI)<= 0 && Math.abs(placeOfJ - tileTotileToMoveJ)<=0){
+//							valid = true;
+//							board[placeOfI][placeOfJ] = board[tileTotileToMoveI][tileTotileToMoveJ];
+//							board[tileTotileToMoveI][tileTotileToMoveJ] = empty;
+//							break;
+//						}
+//						System.out.print(placeOfI + " " + placeOfJ);
+//						System.out.print(tileTotileToMoveI + " " + tileTotileToMoveJ);
+////					}
+//				}
+//		 }
+//		return true;
 	}
 
 	/**
