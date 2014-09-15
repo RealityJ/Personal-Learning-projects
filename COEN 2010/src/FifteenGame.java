@@ -93,6 +93,8 @@ public class FifteenGame {
 	 */
 	public void draw() {
 		int counter = 0;
+		
+		//draws the board, with formatting set so that if its greater than 9, it keeps a straight format
 		for (int i = 0; i <= board.length-1; i++){
 			for(int j = 0; j <= board[i].length-1; j++){
 				counter++;
@@ -117,32 +119,28 @@ public class FifteenGame {
 	 * false.
 	 */
 	public boolean move(int tile) {
-		 int empty = 0;
-		 boolean valid = false;
 		 int placeOfI = 0;
 		 int placeOfJ = 0;
 		 int tileToMoveI = 0;
 		 int tileToMoveJ = 0;
 		 boolean LegalMove;
-		 int otherCounter = 0;
 		 
+		 //finds the 0 and the tile then switches them if not out of range
 		 for (int i = 0; i<=board.length-1;i++){
 			 for(int j=0; j<= board.length-1; j ++){
 				 if(board[i][j] == 0){
 					 placeOfI = i;
 					 placeOfJ = j;
-//					 System.out.println("ZeroPosition = " + placeOfI +"," + placeOfJ);
+
 				 }
 				 if(board[i][j] == tile){
 					 tileToMoveI = i;
 					 tileToMoveJ = j;
-//					 System.out.println("TilePosition = " + tileToMoveI +"," + tileToMoveJ);
 				 }
 			 }
 		 }
 		 if(Math.abs(placeOfI-tileToMoveI)<=1 && Math.abs(placeOfJ-tileToMoveJ) <=1){
 			 LegalMove = true;
-//			 System.out.println("Legal Move");
 			 board[placeOfI][placeOfJ] = tile;
 			 board[tileToMoveI][tileToMoveJ] = 0;
 			 
@@ -152,37 +150,6 @@ public class FifteenGame {
 		 }
 		 return LegalMove;
 		 
-		 
-		 
-		 
-//		 for (int i = 0; i<= board.length-1; i++){
-//				for(int j = 0; j<= board[i].length-1; j++){
-////					if(i > 0 && i < board.length-1 && j > 0 && j < board.length-1){
-//						//handles the middle buttons
-//						//moves to the right
-//						if(board[i][j] == 0){
-//							placeOfI = i;
-//							placeOfJ = j;
-//							System.out.println(placeOfI +" "+placeOfJ);
-//							otherCounter++;
-//						}else if(board[i][j] == tile){
-//							tileTotileToMoveI = i;
-//							tileTotileToMoveJ = j;
-//							System.out.println(tileTotileToMoveI +" "+tileTotileToMoveJ);
-//							otherCounter++;
-//						}
-//						if(otherCounter == 2 && Math.abs(placeOfI - tileTotileToMoveI)<= 0 && Math.abs(placeOfJ - tileTotileToMoveJ)<=0){
-//							valid = true;
-//							board[placeOfI][placeOfJ] = board[tileTotileToMoveI][tileTotileToMoveJ];
-//							board[tileTotileToMoveI][tileTotileToMoveJ] = empty;
-//							break;
-//						}
-//						System.out.print(placeOfI + " " + placeOfJ);
-//						System.out.print(tileTotileToMoveI + " " + tileTotileToMoveJ);
-////					}
-//				}
-//		 }
-//		return true;
 	}
 
 	/**
@@ -190,7 +157,7 @@ public class FifteenGame {
 	 * else false.
 	 */
 	public boolean won() {
-		//TODO: This part isn't right
+		//keeps a counter and then keeps going down until it reaches 0 and ALL values in each cell must be equal to the counter at some point
 		int counter = (board.length*board.length)-1;
 		int otherCounter = 1;
 		boolean didTheyWin = false;
@@ -198,9 +165,6 @@ public class FifteenGame {
 		for( int i = 0; i < board.length; i++)
 		{
 			for (int j = 0; j < board[i].length; j++){
-				if(board[i][j] == 0){
-					continue;
-				}else{
 					if(otherCounter == counter){
 						didTheyWin = true;
 						break;
@@ -210,7 +174,7 @@ public class FifteenGame {
 						}
 					}
 					
-				}
+				
 			}
 		}
 		return didTheyWin;
