@@ -9,7 +9,7 @@ public class HelpDesk {
   private String name       = "";
   private int    index      = 0;
 
-  Student        logStudent = new Student(name, course, workload, time);
+  Student logStudent = new Student(name, course, workload, time);
 
   public void step() {
     time++;
