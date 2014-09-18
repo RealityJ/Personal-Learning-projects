@@ -1,12 +1,7 @@
 package Homework2;
 
-// import java.util.Stack;
 
-/**
- * @author Kyle
- * @param <E>
- *
- */
+
 public class HelpDesk {
   private int    time       = 0;
   private int    course     = 0;
@@ -20,18 +15,12 @@ public class HelpDesk {
     time++;
   }
 
-  /**
-   * @param name
-   * @param course
-   * @param workload
-   */
+ 
   public void addStudent(String name, int course, int workload) {
     Student student = new Student(name, course, workload, time);
   }
 
-  /**
-   * @return
-   */
+ 
   public int getTime() {
     return time;
   }
